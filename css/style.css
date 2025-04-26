@@ -408,6 +408,15 @@ main {
 .about-text span {
   font-weight: 500;
   color: #373737; }
+  .whatsapp_icon {
+    width: 45px;
+    height: 45px;
+    display: block;
+    position: fixed;
+    right: 8px;
+    bottom: 15px;
+    z-index: 9;
+  }
 
 /* feature 
 ---------------------*/
