@@ -1,1133 +1,2135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lokesh Pareek — Frontend Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-/* ─────────────────────────────────────────────
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lokesh Pareek — Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,900&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+
+  <style>
+    /* ─────────────────────────────────────────────
    RESET & TOKENS
 ───────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --ink: #000000;
-  --paper: #f8f5ef;
-  --cream: #f0ead8;
-  --warm: #e8dcc8;
-  --dim: #9c9080;
-  --ghost: #c8bfaa;
-  --gold: #c9a84c;
-  --gold2: #f0c060;
-  --red: #d64040;
-  --green-neon: #39ff7a;
-  --blue-neon: #3af0ff;
-  --border-ink: rgba(0,0,0,0.12);
-  --border-ink2: rgba(0,0,0,0.06);
-}
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Mono', monospace;
-  background: var(--ink);
-  color: var(--paper);
-  overflow-x: hidden;
-  cursor: none;
-}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ─────────────────────────────────────────────
+    :root {
+      --ink: #000000;
+      --paper: #f8f5ef;
+      --cream: #f0ead8;
+      --warm: #e8dcc8;
+      --dim: #9c9080;
+      --ghost: #c8bfaa;
+      --gold: #c9a84c;
+      --gold2: #f0c060;
+      --red: #d64040;
+      --green-neon: #39ff7a;
+      --blue-neon: #3af0ff;
+      --border-ink: rgba(0, 0, 0, 0.12);
+      --border-ink2: rgba(0, 0, 0, 0.06);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--ink);
+      color: var(--paper);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─────────────────────────────────────────────
    CUSTOM CURSOR
 ───────────────────────────────────────────── */
-#dot { position: fixed; width: 6px; height: 6px; background: var(--gold2); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
-#ring { position: fixed; width: 38px; height: 38px; border: 1px solid rgba(240,192,96,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s, border-color .3s, border-radius .3s; }
-.cursor-big #ring { width: 64px; height: 64px; border-color: rgba(240,192,96,0.8); }
-.cursor-sq #ring { border-radius: 4px; width: 52px; height: 52px; }
+    #dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: var(--gold2);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
 
-/* ─────────────────────────────────────────────
+    #ring {
+      position: fixed;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(240, 192, 96, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, border-color .3s, border-radius .3s;
+    }
+
+    .cursor-big #ring {
+      width: 64px;
+      height: 64px;
+      border-color: rgba(240, 192, 96, 0.8);
+    }
+
+    .cursor-sq #ring {
+      border-radius: 4px;
+      width: 52px;
+      height: 52px;
+    }
+
+    /* ─────────────────────────────────────────────
    NOISE TEXTURE OVERLAY
 ───────────────────────────────────────────── */
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 2000; opacity: 0.7;
-}
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 2000;
+      opacity: 0.7;
+    }
 
-/* ─────────────────────────────────────────────
+    /* ─────────────────────────────────────────────
    NAV
 ───────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.6rem 3.5rem;
-  transition: background .4s, backdrop-filter .4s;
-}
-nav.solid {
-  background: rgba(0,0,0,0.9);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.n-logo {
-  font-family: 'Fraunces', serif;
-  font-size: 1.5rem; font-weight: 900; font-style: italic;
-  color: var(--paper); text-decoration: none; letter-spacing: -1px;
-}
-.n-logo span { color: var(--gold2); }
-.n-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-.n-links a {
-  font-size: .68rem; font-weight: 500; letter-spacing: .15em;
-  text-transform: uppercase; color: var(--ghost);
-  text-decoration: none; transition: color .2s;
-}
-.n-links a:hover { color: var(--paper); }
-.n-cta {
-  border: 1px solid rgba(201,168,76,.5) !important;
-  color: var(--gold2) !important;
-  padding: .45rem 1.2rem;
-  transition: background .2s, color .2s !important;
-}
-.n-cta:hover { background: var(--gold2) !important; color: #000 !important; }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 3.5rem;
+      transition: background .4s, backdrop-filter .4s;
+    }
 
-/* ─────────────────────────────────────────────
+    nav.solid {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .n-logo {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      font-style: italic;
+      color: var(--paper);
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .n-logo span {
+      color: var(--gold2);
+    }
+
+    .n-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .n-links a {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .n-links a:hover {
+      color: var(--paper);
+    }
+
+    .n-cta {
+      border: 1px solid rgba(201, 168, 76, .5) !important;
+      color: var(--gold2) !important;
+      padding: .45rem 1.2rem;
+      transition: background .2s, color .2s !important;
+    }
+
+    .n-cta:hover {
+      background: var(--gold2) !important;
+      color: #000 !important;
+    }
+
+    /* ─────────────────────────────────────────────
    HERO — FULL SCREEN CINEMATIC
 ───────────────────────────────────────────── */
-#hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 0 3.5rem;
-  max-width: 1500px; margin: 0 auto;
-  position: relative; z-index: 3;
-  gap: 4rem;
-}
-.h-left { padding-top: 5rem; }
-.h-chip {
-  display: inline-flex; align-items: center; gap: .6rem;
-  font-size: .62rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--green-neon);
-  margin-bottom: 2.5rem;
-  padding: .35rem .9rem;
-  border: 1px solid rgba(57,255,122,.22);
-  background: rgba(57,255,122,.05);
-}
-.h-chip::before {
-  content: ''; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--green-neon);
-  animation: blink 1.6s infinite;
-}
-@keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 3.5rem;
+      max-width: 1500px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+      gap: 4rem;
+    }
 
-.h-title {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(4.5rem, 9vw, 10rem);
-  font-weight: 900; line-height: .9;
-  letter-spacing: -4px;
-  margin-bottom: 1.8rem;
-}
-.h-title .ital { font-style: italic; color: var(--gold2); }
-.h-title .stroke {
-  -webkit-text-stroke: 1.5px rgba(255,255,255,.2);
-  color: transparent;
-}
-.h-body {
-  font-family: 'DM Mono', monospace;
-  font-size: .85rem; color: var(--ghost);
-  line-height: 1.9; max-width: 420px;
-  margin-bottom: 3rem; font-weight: 300;
-}
-.h-actions { display: flex; gap: .75rem; align-items: center; }
-.btn-primary {
-  background: var(--gold2);
-  color: #000;
-  padding: .9rem 2.5rem;
-  font-family: 'DM Mono', monospace;
-  font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
-  text-decoration: none;
-  transition: transform .2s, box-shadow .2s;
-  display: inline-block;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(240,192,96,.3); }
-.btn-text {
-  font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ghost); text-decoration: none;
-  display: flex; align-items: center; gap: .5rem;
-  transition: color .2s;
-}
-.btn-text:hover { color: var(--paper); }
-.btn-text::after { content: '↗'; font-size: .9rem; }
+    .h-left {
+      padding-top: 5rem;
+    }
 
-/* RIGHT SIDE — stats + rotating ring */
-.h-right {
-  padding-top: 5rem;
-  display: flex; flex-direction: column;
-  align-items: flex-end; gap: 2rem;
-  position: relative;
-}
-.h-ring-wrap {
-  position: relative;
-  width: 260px; height: 260px;
-  flex-shrink: 0;
-}
-.h-ring {
-  width: 260px; height: 260px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.07);
-  position: absolute; top: 0; left: 0;
-  animation: spin 30s linear infinite;
-}
-.h-ring::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 50%;
-  width: 8px; height: 8px;
-  background: var(--gold2);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 14px var(--gold2), 0 0 28px var(--gold2);
-}
-@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-.h-ring-inner {
-  position: absolute;
-  inset: 30px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.04);
-  animation: spin 20s linear infinite reverse;
-}
-.h-ring-center {
-  position: absolute;
-  inset: 0; display: flex;
-  flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-}
-.h-ring-num {
-  font-family: 'Fraunces', serif;
-  font-size: 3.5rem; font-weight: 900; line-height: 1;
-  color: var(--paper);
-}
-.h-ring-label {
-  font-size: .6rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--dim); margin-top: .3rem;
-}
-.h-stats-col {
-  display: flex; flex-direction: column; gap: 1px;
-  width: 100%;
-}
-.h-stat {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.h-stat:first-child { border-top: 1px solid rgba(255,255,255,.06); }
-.h-stat-n {
-  font-family: 'Fraunces', serif;
-  font-size: 1.8rem; font-weight: 900; line-height: 1;
-  color: var(--paper);
-}
-.h-stat-n sup { font-size: .9rem; color: var(--gold2); }
-.h-stat-l { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+    .h-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green-neon);
+      margin-bottom: 2.5rem;
+      padding: .35rem .9rem;
+      border: 1px solid rgba(57, 255, 122, .22);
+      background: rgba(57, 255, 122, .05);
+    }
 
-/* ─────────────────────────────────────────────
+    .h-chip::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green-neon);
+      animation: blink 1.6s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .h-title {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: clamp(3rem, 7vw, 7.5rem);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -3px;
+      margin-bottom: 1.8rem;
+    }
+
+    .h-title .ital {
+      font-style: italic;
+      color: var(--gold2);
+    }
+
+    .h-title .stroke {
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, .2);
+      color: transparent;
+    }
+
+    .h-body {
+      font-family: 'DM Mono', monospace;
+      font-size: .85rem;
+      color: var(--ghost);
+      line-height: 1.9;
+      max-width: 420px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .h-actions {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--gold2);
+      color: #000;
+      padding: .9rem 2.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(240, 192, 96, .3);
+    }
+
+    .btn-text {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: color .2s;
+    }
+
+    .btn-text:hover {
+      color: var(--paper);
+    }
+
+    .btn-text::after {
+      content: '↗';
+      font-size: .9rem;
+    }
+
+    /* RIGHT SIDE — stats + rotating ring */
+    .h-right {
+      padding-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2rem;
+      position: relative;
+    }
+
+    .h-ring-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      flex-shrink: 0;
+    }
+
+    .h-ring {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .07);
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: spin 30s linear infinite;
+    }
+
+    .h-ring::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--gold2);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 14px var(--gold2), 0 0 28px var(--gold2);
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .h-ring-inner {
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .04);
+      animation: spin 20s linear infinite reverse;
+    }
+
+    .h-ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .h-ring-num {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .h-ring-label {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-top: .3rem;
+    }
+
+    .h-stats-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      width: 100%;
+    }
+
+    .h-stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .h-stat:first-child {
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .h-stat-n {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .h-stat-n sup {
+      font-size: .9rem;
+      color: var(--gold2);
+    }
+
+    .h-stat-l {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ─────────────────────────────────────────────
    SCROLLING TICKER
 ───────────────────────────────────────────── */
-.ticker-wrap {
-  position: relative; z-index: 3;
-  width: 100%; overflow: hidden;
-  border-top: 1px solid rgba(255,255,255,.06);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  padding: 1rem 0;
-  background: rgba(255,255,255,.02);
-}
-.ticker-track {
-  display: inline-flex; white-space: nowrap;
-  animation: ticker 25s linear infinite;
-}
-.ticker-track:hover { animation-play-state: paused; }
-.ti { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); padding: 0 2.5rem; }
-.ti-dot { color: var(--gold2); margin: 0 .2rem; }
-@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .ticker-wrap {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      padding: 1rem 0;
+      background: rgba(255, 255, 255, .02);
+    }
 
-/* ─────────────────────────────────────────────
+    .ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: ticker 25s linear infinite;
+    }
+
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    .ti {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      padding: 0 2.5rem;
+    }
+
+    .ti-dot {
+      color: var(--gold2);
+      margin: 0 .2rem;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* ─────────────────────────────────────────────
    SECTION WRAPPER
 ───────────────────────────────────────────── */
-.s { position: relative; z-index: 3; }
-.s-inner { max-width: 1500px; margin: 0 auto; padding: 8rem 3.5rem; }
+    .s {
+      position: relative;
+      z-index: 3;
+    }
 
-/* Section header */
-.s-head {
-  display: grid; grid-template-columns: auto 1fr auto;
-  align-items: end; gap: 2rem;
-  margin-bottom: 5rem;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  padding-bottom: 2rem;
-}
-.s-index {
-  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold2); font-weight: 500;
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  height: 70px; display: flex; align-items: center;
-}
-.s-titles { }
-.s-eyebrow { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); margin-bottom: .6rem; }
-.s-heading {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 900; line-height: .95;
-  letter-spacing: -2px;
-}
-.s-heading em { font-style: italic; color: var(--gold2); }
-.s-num {
-  font-family: 'Fraunces', serif;
-  font-size: 9rem; font-weight: 900;
-  color: rgba(255,255,255,.03);
-  line-height: 1; letter-spacing: -6px;
-  align-self: flex-end;
-}
+    .s-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 8rem 3.5rem;
+    }
 
-/* ─────────────────────────────────────────────
+    /* Section header */
+    .s-head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      padding-bottom: 2rem;
+    }
+
+    .s-index {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      font-weight: 500;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      height: 70px;
+      display: flex;
+      align-items: center;
+    }
+
+    .s-titles {}
+
+    .s-eyebrow {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: .6rem;
+    }
+
+    .s-heading {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .s-heading em {
+      font-style: normal;
+      color: var(--gold2);
+      font-family: "Dancing Script", cursive;
+    }
+
+    .s-num {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 6rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .03);
+      line-height: 1;
+      letter-spacing: -4px;
+      align-self: flex-end;
+    }
+
+    /* ─────────────────────────────────────────────
    SKILLS — 3-COLUMN TABLE
 ───────────────────────────────────────────── */
-.sk-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.06); }
-.sk-col { background: var(--ink); padding: 2rem; }
-.sk-col-title {
-  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold2); margin-bottom: 1.5rem;
-  padding-bottom: .75rem;
-  border-bottom: 1px solid rgba(201,168,76,.2);
-}
-.sk-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
-.sk-list li {
-  font-size: .78rem; color: var(--ghost); font-weight: 300;
-  padding: .5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  display: flex; align-items: center; gap: .6rem;
-  transition: color .2s, padding-left .2s;
-  cursor: default;
-}
-.sk-list li:hover { color: var(--paper); padding-left: .5rem; }
-.sk-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
-.d-react { background: #61dafb; }
-.d-wp { background: #21759b; }
-.d-next { background: #fff; }
-.d-node { background: #6cc24a; }
-.d-tool { background: var(--gold2); }
-.d-core { background: var(--dim); }
+    .sk-table {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, .06);
+    }
 
-/* ─────────────────────────────────────────────
+    .sk-col {
+      background: var(--ink);
+      padding: 2rem;
+    }
+
+    .sk-col-title {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      margin-bottom: 1.5rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid rgba(201, 168, 76, .2);
+    }
+
+    .sk-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .sk-list li {
+      font-size: .78rem;
+      color: var(--ghost);
+      font-weight: 300;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      transition: color .2s, padding-left .2s;
+      cursor: default;
+    }
+
+    .sk-list li:hover {
+      color: var(--paper);
+      padding-left: .5rem;
+    }
+
+    .sk-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .d-react {
+      background: #61dafb;
+    }
+
+    .d-wp {
+      background: #21759b;
+    }
+
+    .d-next {
+      background: #fff;
+    }
+
+    .d-node {
+      background: #6cc24a;
+    }
+
+    .d-tool {
+      background: var(--gold2);
+    }
+
+    .d-core {
+      background: var(--dim);
+    }
+
+    /* ─────────────────────────────────────────────
    EXPERIENCE — LARGE TYPOGRAPHIC
 ───────────────────────────────────────────── */
-.exp-list { display: flex; flex-direction: column; }
-.exp-row {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 4rem;
-  padding: 3rem 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  position: relative; overflow: hidden;
-}
-.exp-row:first-child { border-top: 1px solid rgba(255,255,255,.06); }
-.exp-row::before {
-  content: ''; position: absolute; bottom: 0; left: 0;
-  width: 0; height: 1px; background: var(--gold2);
-  transition: width .6s ease;
-}
-.exp-row:hover::before { width: 100%; }
-.exp-side { }
-.exp-yr {
-  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--dim); margin-bottom: .75rem;
-}
-.exp-co {
-  font-family: 'Fraunces', serif;
-  font-size: 1.6rem; font-weight: 700; line-height: 1.1;
-  color: var(--paper); margin-bottom: .3rem;
-}
-.exp-role {
-  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold2); font-weight: 500;
-  padding: .2rem .6rem;
-  border: 1px solid rgba(201,168,76,.25);
-  background: rgba(201,168,76,.06);
-  display: inline-block; margin-top: .5rem;
-}
-.exp-content { padding-top: .25rem; }
-.exp-body {
-  font-size: .82rem; color: var(--dim); line-height: 1.9; font-weight: 300;
-  margin-bottom: 1.25rem; max-width: 620px;
-}
-.exp-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
-.ep {
-  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--dim); border: 1px solid rgba(255,255,255,.08);
-  padding: .2rem .6rem; font-weight: 400;
-  transition: color .2s, border-color .2s;
-}
-.exp-row:hover .ep { color: var(--ghost); border-color: rgba(255,255,255,.14); }
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+    }
 
-/* ─────────────────────────────────────────────
-   PROJECTS — HORIZONTAL SCROLL SHOWCASE
+    .exp-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 4rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exp-row:first-child {
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .exp-row::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold2);
+      transition: width .6s ease;
+    }
+
+    .exp-row:hover::before {
+      width: 100%;
+    }
+
+    .exp-side {}
+
+    .exp-yr {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: .75rem;
+    }
+
+    .exp-co {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--paper);
+      margin-bottom: .3rem;
+    }
+
+    .exp-role {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      font-weight: 500;
+      padding: .2rem .6rem;
+      border: 1px solid rgba(201, 168, 76, .25);
+      background: rgba(201, 168, 76, .06);
+      display: inline-block;
+      margin-top: .5rem;
+    }
+
+    .exp-content {
+      padding-top: .25rem;
+    }
+
+    .exp-body {
+      font-size: .82rem;
+      color: var(--dim);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+      max-width: 620px;
+    }
+
+    .exp-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .ep {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: .2rem .6rem;
+      font-weight: 400;
+      transition: color .2s, border-color .2s;
+    }
+
+    .exp-row:hover .ep {
+      color: var(--ghost);
+      border-color: rgba(255, 255, 255, .14);
+    }
+
+    /* ─────────────────────────────────────────────
+   PROJECTS — GRID
 ───────────────────────────────────────────── */
-.proj-filters {
-  display: flex; gap: .4rem; padding: 0 3.5rem;
-  margin-bottom: 2.5rem; max-width: 1500px; margin-left: auto; margin-right: auto;
-}
-.pf {
-  background: none;
-  border: 1px solid rgba(255,255,255,.1);
-  color: var(--dim);
-  font-family: 'DM Mono', monospace;
-  font-size: .62rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
-  padding: .45rem 1rem;
-  cursor: none; transition: all .2s;
-}
-.pf:hover, .pf.on { background: var(--gold2); border-color: var(--gold2); color: #000; }
+    .proj-filters {
+      display: flex;
+      gap: .4rem;
+      padding: 0 3.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 1500px;
+      margin-left: auto;
+      margin-right: auto;
+      flex-wrap: wrap;
+    }
 
-/* horizontal scroll reel */
-.proj-reel {
-  display: flex; gap: 1px;
-  padding: 0 3.5rem 4rem;
-  overflow-x: auto; scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  background: rgba(255,255,255,.04);
-  max-width: 100%; position: relative; z-index: 3;
-}
-.proj-reel::-webkit-scrollbar { display: none; }
+    .pf {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .45rem 1rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
 
-.p-card {
-  background: var(--ink);
-  min-width: 420px; max-width: 420px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  display: flex; flex-direction: column;
-  border-right: 1px solid rgba(255,255,255,.05);
-  transition: background .3s;
-  position: relative;
-}
-.p-card:hover { background: #0d0d0d; }
-.p-card.hidden { display: none; }
-.p-card.wide { min-width: 600px; max-width: 600px; }
+    .pf:hover,
+    .pf.on {
+      background: var(--gold2);
+      border-color: var(--gold2);
+      color: #000;
+    }
 
-.p-thumb {
-  height: 260px; background: #0a0a0a;
-  position: relative; overflow: hidden;
-}
-.p-thumb img {
-  width: 100%; height: 100%; object-fit: cover;
-  opacity: .75; transition: opacity .4s, transform .5s;
-}
-.p-card:hover .p-thumb img { opacity: 1; transform: scale(1.04); }
-.p-ph {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 6rem; font-weight: 900; font-style: italic;
-  color: rgba(255,255,255,.04); letter-spacing: -4px;
-}
-.p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 50%); }
-.p-type {
-  position: absolute; top: 14px; right: 14px;
-  font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500;
-  padding: .28rem .65rem;
-}
-.t-react { background: rgba(97,218,251,.1); color: #61dafb; border: 1px solid rgba(97,218,251,.2); }
-.t-wp { background: rgba(33,117,155,.1); color: #5cc8ef; border: 1px solid rgba(33,117,155,.2); }
-.t-next { background: rgba(255,255,255,.07); color: #bbb; border: 1px solid rgba(255,255,255,.15); }
-.t-node { background: rgba(108,194,74,.1); color: #7ed452; border: 1px solid rgba(108,194,74,.2); }
-.t-js { background: rgba(247,220,111,.1); color: #f7dc6f; border: 1px solid rgba(247,220,111,.2); }
+    /* grid layout */
+    .proj-reel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      padding: 0 3.5rem 4rem;
+      background: rgba(255, 255, 255, .06);
+      max-width: 1500px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+    }
 
-.p-body { padding: 1.75rem 2rem; flex: 1; display: flex; flex-direction: column; }
-.p-num {
-  font-size: .6rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold2); margin-bottom: .6rem;
-}
-.p-name {
-  font-family: 'Fraunces', serif;
-  font-size: 1.5rem; font-weight: 700; line-height: 1.1;
-  color: var(--paper); margin-bottom: .75rem;
-}
-.p-desc { font-size: .78rem; color: var(--dim); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; flex: 1; }
-.p-stack { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.5rem; }
-.pc { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); border: 1px solid rgba(255,255,255,.07); padding: .18rem .5rem; }
-.p-link {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold2); text-decoration: none; font-weight: 500;
-  transition: gap .25s;
-  margin-top: auto;
-}
-.p-link::after { content: '→'; transition: transform .25s; }
-.p-link:hover { gap: .85rem; }
-.p-link:hover::after { transform: translateX(4px); }
+    .p-card {
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      transition: background .3s;
+      position: relative;
+    }
 
-/* scroll hint */
-.reel-hint {
-  position: relative; z-index: 3;
-  padding: 0 3.5rem 1rem;
-  font-size: .6rem; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--dim); display: flex; align-items: center; gap: .75rem;
-}
-.reel-hint::before { content: ''; flex: 0 0 40px; height: 1px; background: var(--dim); }
+    .p-card:hover {
+      background: #0d0d0d;
+    }
 
-/* ─────────────────────────────────────────────
+    .p-card.hidden {
+      display: none;
+    }
+
+    .p-card.wide {
+      grid-column: span 1;
+    }
+
+    .p-thumb {
+      height: 260px;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .p-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .75;
+      transition: opacity .4s, transform .5s;
+    }
+
+    .p-card:hover .p-thumb img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .p-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 6rem;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(255, 255, 255, .04);
+      letter-spacing: -4px;
+    }
+
+    .p-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .8) 0%, transparent 50%);
+    }
+
+    .p-type {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .28rem .65rem;
+      background: rgba(0, 0, 0, alpha) !important;
+    }
+
+    .t-react {
+      background: rgba(97, 218, 251, .1);
+      color: #61dafb;
+      border: 1px solid rgba(97, 218, 251, .2);
+    }
+
+    .t-wp {
+      background: rgba(33, 117, 155, .1);
+      color: #5cc8ef;
+      border: 1px solid rgba(33, 117, 155, .2);
+    }
+
+    .t-next {
+      background: rgba(255, 255, 255, .07);
+      color: #bbb;
+      border: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .t-node {
+      background: rgba(108, 194, 74, .1);
+      color: #7ed452;
+      border: 1px solid rgba(108, 194, 74, .2);
+    }
+
+    .t-js {
+      background: rgba(247, 220, 111, .1);
+      color: #f7dc6f;
+      border: 1px solid rgba(247, 220, 111, .2);
+    }
+
+    .p-body {
+      padding: 1.75rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .p-num {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      margin-bottom: .6rem;
+    }
+
+    .p-name {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--paper);
+      margin-bottom: .75rem;
+    }
+
+    .p-desc {
+      font-size: .78rem;
+      color: var(--dim);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .p-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pc {
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid rgba(255, 255, 255, .07);
+      padding: .18rem .5rem;
+    }
+
+    .p-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      text-decoration: none;
+      font-weight: 500;
+      transition: gap .25s;
+      margin-top: auto;
+    }
+
+    .p-link::after {
+      content: '→';
+      transition: transform .25s;
+    }
+
+    .p-link:hover {
+      gap: .85rem;
+    }
+
+    .p-link:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* scroll hint - removed */
+    /* ─────────────────────────────────────────────
+   WHATSAPP FLOATING BUTTON
+───────────────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 700;
+      width: 54px;
+      height: 54px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37, 211, 102, .45), 0 2px 8px rgba(0, 0, 0, .3);
+      text-decoration: none;
+      transition: transform .25s, box-shadow .25s;
+      animation: wa-pulse 3s ease-in-out infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.12) translateY(-2px);
+      box-shadow: 0 8px 36px rgba(37, 211, 102, .6), 0 4px 12px rgba(0, 0, 0, .3);
+      animation: none;
+    }
+
+    .wa-float svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .wa-tooltip {
+      position: absolute;
+      right: 64px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--ghost);
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      white-space: nowrap;
+      padding: .4rem .85rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+
+    .wa-float:hover .wa-tooltip {
+      opacity: 1;
+    }
+
+    @keyframes wa-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 24px rgba(37, 211, 102, .45), 0 2px 8px rgba(0, 0, 0, .3);
+      }
+
+      50% {
+        box-shadow: 0 4px 32px rgba(37, 211, 102, .7), 0 0 0 8px rgba(37, 211, 102, .1);
+      }
+    }
+
+    /* ─────────────────────────────────────────────
    CONTACT — SPLIT CINEMATIC
 ───────────────────────────────────────────── */
-#contact-s {
-  position: relative; z-index: 3;
-  border-top: 1px solid rgba(255,255,255,.06);
-}
-.c-grid {
-  max-width: 1500px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 90vh;
-}
-.c-left {
-  padding: 7rem 3.5rem;
-  border-right: 1px solid rgba(255,255,255,.06);
-  display: flex; flex-direction: column; justify-content: space-between;
-}
-.c-big {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  font-weight: 900; line-height: .88;
-  letter-spacing: -3px;
-}
-.c-big em { font-style: italic; color: var(--gold2); }
-.c-sub {
-  font-size: .82rem; color: var(--dim); line-height: 1.9; font-weight: 300;
-  max-width: 380px; margin-top: 1.5rem;
-}
-.c-links { display: flex; flex-direction: column; margin-top: 4rem; }
-.c-lnk {
-  display: flex; align-items: center;
-  padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,.06);
-  text-decoration: none; gap: 1.25rem;
-  position: relative; overflow: hidden;
-  transition: padding-left .3s ease;
-}
-.c-lnk:first-child { border-top: 1px solid rgba(255,255,255,.06); }
-.c-lnk:hover { padding-left: 1rem; }
-.c-lnk::before {
-  content: ''; position: absolute;
-  left: 0; top: 50%; transform: translateY(-50%);
-  width: 0; height: 1px; background: var(--gold2);
-  transition: width .35s ease;
-}
-.c-lnk:hover::before { width: 0.6rem; }
-.c-icon {
-  width: 40px; height: 40px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid rgba(255,255,255,.08);
-  font-size: .9rem; color: var(--ghost);
-  transition: border-color .25s, color .25s;
-}
-.c-lnk:hover .c-icon { border-color: var(--gold2); color: var(--gold2); }
-.c-ll { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--dim); margin-bottom: .15rem; }
-.c-lv { font-size: .82rem; color: var(--ghost); font-weight: 300; }
-.c-arr { margin-left: auto; color: rgba(255,255,255,.15); font-size: 1.1rem; transition: color .2s, transform .2s; }
-.c-lnk:hover .c-arr { color: var(--gold2); transform: translateX(4px); }
+    #contact-s {
+      position: relative;
+      z-index: 3;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
 
-.c-right {
-  padding: 7rem 3.5rem;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.c-form-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.8rem; font-weight: 700; letter-spacing: -1px;
-  margin-bottom: 2.5rem;
-}
-.f-row { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.2rem; }
-.f-lbl {
-  font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--dim); font-weight: 500;
-}
-.f-in, .f-ta {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  border-bottom-color: rgba(255,255,255,.18);
-  color: var(--paper);
-  font-family: 'DM Mono', monospace;
-  font-size: .82rem; font-weight: 300;
-  padding: .9rem 1rem; outline: none; resize: none;
-  transition: border-color .2s, background .2s;
-}
-.f-in:focus, .f-ta:focus {
-  border-color: rgba(201,168,76,.5);
-  background: rgba(201,168,76,.03);
-}
-.f-in::placeholder, .f-ta::placeholder { color: rgba(255,255,255,.15); }
-.f-submit {
-  background: var(--gold2); color: #000; border: none;
-  padding: 1.1rem 3rem;
-  font-family: 'DM Mono', monospace;
-  font-size: .72rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
-  cursor: none; margin-top: 1rem;
-  transition: opacity .2s, transform .2s;
-  width: 100%;
-}
-.f-submit:hover { opacity: .88; transform: translateY(-2px); }
+    .c-grid {
+      max-width: 1500px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
 
-/* ─────────────────────────────────────────────
+    .c-left {
+      padding: 7rem 3.5rem;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .c-big {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      /* font-family: 'Syne', sans-serif; */
+      font-size: clamp(2rem, 5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .c-big em {
+      font-style: italic;
+      color: var(--gold2);
+      font-style: normal;
+      font-family: "Dancing Script", cursive;
+    }
+
+    .c-sub {
+      font-size: .82rem;
+      color: var(--dim);
+      line-height: 1.9;
+      font-weight: 300;
+      max-width: 380px;
+      margin-top: 1.5rem;
+    }
+
+    .c-links {
+      display: flex;
+      flex-direction: column;
+      margin-top: 4rem;
+    }
+
+    .c-lnk {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      text-decoration: none;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: padding-left .3s ease;
+    }
+
+    .c-lnk:first-child {
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .c-lnk:hover {
+      padding-left: 1rem;
+    }
+
+    .c-lnk::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 1px;
+      background: var(--gold2);
+      transition: width .35s ease;
+    }
+
+    .c-lnk:hover::before {
+      width: 0.6rem;
+    }
+
+    .c-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, .08);
+      font-size: .9rem;
+      color: var(--ghost);
+      transition: border-color .25s, color .25s;
+    }
+
+    .c-lnk:hover .c-icon {
+      border-color: var(--gold2);
+      color: var(--gold2);
+    }
+
+    .c-ll {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: .15rem;
+    }
+
+    .c-lv {
+      font-size: .82rem;
+      color: var(--ghost);
+      font-weight: 300;
+    }
+
+    .c-arr {
+      margin-left: auto;
+      color: rgba(255, 255, 255, .15);
+      font-size: 1.1rem;
+      transition: color .2s, transform .2s;
+    }
+
+    .c-lnk:hover .c-arr {
+      color: var(--gold2);
+      transform: translateX(4px);
+    }
+
+    .c-right {
+      padding: 7rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .c-form-title {
+      /* font-family: 'Fraunces', serif; */
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 2.5rem;
+    }
+
+    .f-row {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .f-lbl {
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 500;
+    }
+
+    .f-in,
+    .f-ta {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-bottom-color: rgba(255, 255, 255, .18);
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      font-size: .82rem;
+      font-weight: 300;
+      padding: .9rem 1rem;
+      outline: none;
+      resize: none;
+      transition: border-color .2s, background .2s;
+    }
+
+    .f-in:focus,
+    .f-ta:focus {
+      border-color: rgba(201, 168, 76, .5);
+      background: rgba(201, 168, 76, .03);
+    }
+
+    .f-in::placeholder,
+    .f-ta::placeholder {
+      color: rgba(255, 255, 255, .15);
+    }
+
+    .f-submit {
+      background: var(--gold2);
+      color: #000;
+      border: none;
+      padding: 1.1rem 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: none;
+      margin-top: 1rem;
+      transition: opacity .2s, transform .2s;
+      width: 100%;
+    }
+
+    .f-submit:hover {
+      opacity: .88;
+      transform: translateY(-2px);
+    }
+
+    /* ─────────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────────── */
-footer {
-  position: relative; z-index: 3;
-  border-top: 1px solid rgba(255,255,255,.06);
-  max-width: 1500px; margin: 0 auto;
-  padding: 2.5rem 3.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.f-copy { font-size: .65rem; letter-spacing: .1em; color: var(--dim); }
-.f-copy span { color: var(--gold2); }
-.f-nav { display: flex; gap: 2rem; }
-.f-nav a { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color .2s; }
-.f-nav a:hover { color: var(--gold2); }
+    footer {
+      position: relative;
+      z-index: 3;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 2.5rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-/* ─────────────────────────────────────────────
+    .f-copy {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: var(--dim);
+    }
+
+    .f-copy span {
+      color: var(--gold2);
+    }
+
+    .f-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .f-nav a {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .f-nav a:hover {
+      color: var(--gold2);
+    }
+
+    /* ─────────────────────────────────────────────
    SCROLL REVEAL
 ───────────────────────────────────────────── */
-.r { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1); }
-.r.v { opacity: 1; transform: none; }
-.r2 { opacity: 0; transform: translateX(-24px); transition: opacity .7s ease, transform .7s ease; }
-.r2.v { opacity: 1; transform: none; }
+    .r {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1);
+    }
 
-/* ─────────────────────────────────────────────
+    .r.v {
+      opacity: 1;
+      transform: none;
+    }
+
+    .r2 {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .r2.v {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─────────────────────────────────────────────
    MOBILE
 ───────────────────────────────────────────── */
-@media(max-width:960px){
-  nav{padding:1.2rem 1.5rem}
-  .n-links a:not(.n-cta){display:none}
-  #hero{grid-template-columns:1fr;gap:3rem;padding:0 1.5rem}
-  .h-right{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:1rem}
-  .h-ring-wrap{display:none}
-  .s-inner{padding:5rem 1.5rem}
-  .s-head{grid-template-columns:1fr auto}
-  .s-index{display:none}
-  .sk-table{grid-template-columns:1fr 1fr}
-  .exp-row{grid-template-columns:1fr}
-  .c-grid{grid-template-columns:1fr}
-  .c-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:4rem 1.5rem}
-  .c-right{padding:4rem 1.5rem}
-  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
-  .proj-reel{padding:0 1.5rem 3rem}
-  .proj-filters{padding:0 1.5rem}
-  .reel-hint{padding:0 1.5rem .75rem}
-  .p-card{min-width:320px;max-width:320px}
-  .p-card.wide{min-width:320px;max-width:320px}
-}
-</style>
+    @media(max-width:1100px) {
+      .proj-reel {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #hero {
+        padding: 0 2rem;
+      }
+
+      .s-inner {
+        padding: 6rem 2rem;
+      }
+
+      .proj-filters {
+        padding: 0 2rem;
+      }
+
+      .proj-reel {
+        padding: 0 2rem 4rem;
+      }
+    }
+
+    @media(max-width:768px) {
+      nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .n-links a:not(.n-cta) {
+        display: none;
+      }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 6rem 1.25rem 3rem;
+        gap: 2rem;
+        min-height: auto;
+      }
+
+      .h-left {
+        padding-top: 0;
+      }
+
+      .h-title {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+        letter-spacing: -2px;
+      }
+
+      .h-body {
+        font-size: .78rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .h-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .75rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        text-align: center;
+      }
+
+      .h-right {
+        align-items: flex-start;
+        padding-top: 0;
+        gap: .75rem;
+      }
+
+      .h-ring-wrap {
+        display: none;
+      }
+
+      .h-stats-col {
+        width: 100%;
+      }
+
+      .h-stat {
+        padding: .65rem 0;
+      }
+
+      .h-stat-n {
+        font-size: 1.3rem;
+      }
+
+      .ti {
+        padding: 0 1rem;
+        font-size: .6rem;
+      }
+
+      .s-inner {
+        padding: 3.5rem 1.25rem;
+      }
+
+      .s-head {
+        grid-template-columns: 1fr;
+        gap: .5rem;
+        margin-bottom: 2rem;
+      }
+
+      .s-index,
+      .s-num {
+        display: none;
+      }
+
+      .s-heading {
+        font-size: 1.4rem;
+        letter-spacing: -.5px;
+      }
+
+      .sk-table {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .exp-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.75rem 0;
+      }
+
+      .exp-co {
+        font-size: 1.1rem;
+      }
+
+      .exp-body {
+        font-size: .78rem;
+      }
+
+      .proj-filters {
+        padding: 0 1.25rem;
+        gap: .3rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .pf {
+        font-size: .58rem;
+        padding: .38rem .7rem;
+      }
+
+      .proj-reel {
+        grid-template-columns: 1fr;
+        padding: 0 1.25rem 3rem;
+        max-width: 100%;
+      }
+
+      .p-card.wide {
+        grid-column: span 1;
+      }
+
+      .p-thumb {
+        height: 190px;
+      }
+
+      .p-body {
+        padding: 1.1rem 1.25rem;
+      }
+
+      .p-name {
+        font-size: 1rem;
+      }
+
+      .c-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .c-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+        padding: 3.5rem 1.25rem;
+      }
+
+      .c-right {
+        padding: 3rem 1.25rem;
+      }
+
+      .c-big {
+        font-size: clamp(2rem, 9vw, 3rem);
+        letter-spacing: -1.5px;
+      }
+
+      .c-sub {
+        font-size: .78rem;
+      }
+
+      .f-in,
+      .f-ta {
+        font-size: .78rem;
+        padding: .7rem .85rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 2rem 1.25rem;
+      }
+
+      .wa-float {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 48px;
+        height: 48px;
+      }
+
+      .wa-float svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .wa-tooltip {
+        display: none;
+      }
+    }
+
+    @media(max-width:420px) {
+      .sk-table {
+        grid-template-columns: 1fr;
+      }
+
+      .h-title {
+        font-size: 2.5rem;
+      }
+
+      .h-chip {
+        font-size: .55rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="dot"></div>
-<div id="ring"></div>
+  <div id="dot"></div>
+  <div id="ring"></div>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="n-logo">L<span>.</span>P</a>
-  <ul class="n-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#exp">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact-s" class="n-cta">Hire Me</a></li>
-  </ul>
-</nav>
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/917231079453?text=Hi%20Lokesh%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!"
+    target="_blank" class="wa-float" title="Chat on WhatsApp">
+    <span class="wa-tooltip">Chat on WhatsApp</span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="h-left">
-    <div class="h-chip">Available for new opportunities</div>
-    <h1 class="h-title">
-      Lo<em class="ital">k</em>esh<br/>
-      <span class="stroke">Pareek</span>
-    </h1>
-    <p class="h-body">Senior Frontend Developer — 6+ years building real-time gaming platforms, enterprise WordPress ecosystems, and React-powered web apps from Jaipur, India.</p>
-    <div class="h-actions">
-      <a href="#projects" class="btn-primary">See My Work</a>
-      <a href="#contact-s" class="btn-text">Get in touch</a>
-    </div>
-  </div>
-  <div class="h-right">
-    <div class="h-ring-wrap">
-      <div class="h-ring"></div>
-      <div class="h-ring-inner"></div>
-      <div class="h-ring-center">
-        <div class="h-ring-num" id="yr-count">0</div>
-        <div class="h-ring-label">Years of<br/>Experience</div>
-      </div>
-    </div>
-    <div class="h-stats-col">
-      <div class="h-stat">
-        <span class="h-stat-l">Projects Delivered</span>
-        <span class="h-stat-n"><span id="proj-count">0</span><sup>+</sup></span>
-      </div>
-      <div class="h-stat">
-        <span class="h-stat-l">Companies Worked At</span>
-        <span class="h-stat-n">3</span>
-      </div>
-      <div class="h-stat">
-        <span class="h-stat-l">Started Coding</span>
-        <span class="h-stat-n">2019</span>
-      </div>
-      <div class="h-stat">
-        <span class="h-stat-l">Based In</span>
-        <span class="h-stat-n" style="font-size:1rem;letter-spacing:-.5px">Jaipur, IN</span>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="n-logo">L<span>.</span>P</a>
+    <ul class="n-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#exp">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact-s" class="n-cta">Hire Me</a></li>
+    </ul>
+  </nav>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span class="ti">ReactJS</span><span class="ti-dot">✦</span>
-    <span class="ti">Next.js</span><span class="ti-dot">✦</span>
-    <span class="ti">Redux Toolkit</span><span class="ti-dot">✦</span>
-    <span class="ti">Tailwind CSS</span><span class="ti-dot">✦</span>
-    <span class="ti">WordPress</span><span class="ti-dot">✦</span>
-    <span class="ti">Material UI</span><span class="ti-dot">✦</span>
-    <span class="ti">WooCommerce</span><span class="ti-dot">✦</span>
-    <span class="ti">Node.js</span><span class="ti-dot">✦</span>
-    <span class="ti">REST API</span><span class="ti-dot">✦</span>
-    <span class="ti">Bootstrap 5</span><span class="ti-dot">✦</span>
-    <span class="ti">Context API</span><span class="ti-dot">✦</span>
-    <span class="ti">Git / GitHub</span><span class="ti-dot">✦</span>
-    <span class="ti">ReactJS</span><span class="ti-dot">✦</span>
-    <span class="ti">Next.js</span><span class="ti-dot">✦</span>
-    <span class="ti">Redux Toolkit</span><span class="ti-dot">✦</span>
-    <span class="ti">Tailwind CSS</span><span class="ti-dot">✦</span>
-    <span class="ti">WordPress</span><span class="ti-dot">✦</span>
-    <span class="ti">Material UI</span><span class="ti-dot">✦</span>
-    <span class="ti">WooCommerce</span><span class="ti-dot">✦</span>
-    <span class="ti">Node.js</span><span class="ti-dot">✦</span>
-    <span class="ti">REST API</span><span class="ti-dot">✦</span>
-    <span class="ti">Bootstrap 5</span><span class="ti-dot">✦</span>
-    <span class="ti">Context API</span><span class="ti-dot">✦</span>
-    <span class="ti">Git / GitHub</span><span class="ti-dot">✦</span>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<div id="skills" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
-  <div class="s-inner">
-    <div class="s-head r">
-      <div class="s-index">01</div>
-      <div class="s-titles">
-        <div class="s-eyebrow">Expertise</div>
-        <h2 class="s-heading">Skills &<br/><em>Technologies</em></h2>
-      </div>
-      <div class="s-num">01</div>
-    </div>
-    <div class="sk-table r">
-      <div class="sk-col">
-        <div class="sk-col-title">React Ecosystem</div>
-        <ul class="sk-list">
-          <li><span class="sk-dot d-react"></span>ReactJS</li>
-          <li><span class="sk-dot d-react"></span>Redux Toolkit</li>
-          <li><span class="sk-dot d-react"></span>Context API</li>
-          <li><span class="sk-dot d-react"></span>React Hooks</li>
-          <li><span class="sk-dot d-react"></span>Material UI</li>
-        </ul>
-      </div>
-      <div class="sk-col">
-        <div class="sk-col-title">Core Web</div>
-        <ul class="sk-list">
-          <li><span class="sk-dot d-core"></span>HTML5</li>
-          <li><span class="sk-dot d-core"></span>CSS3</li>
-          <li><span class="sk-dot d-core"></span>JavaScript ES6+</li>
-          <li><span class="sk-dot d-core"></span>jQuery</li>
-          <li><span class="sk-dot d-core"></span>Bootstrap 5</li>
-          <li><span class="sk-dot d-core"></span>Tailwind CSS</li>
-        </ul>
-      </div>
-      <div class="sk-col">
-        <div class="sk-col-title">WordPress & CMS</div>
-        <ul class="sk-list">
-          <li><span class="sk-dot d-wp"></span>WordPress</li>
-          <li><span class="sk-dot d-wp"></span>Elementor</li>
-          <li><span class="sk-dot d-wp"></span>WPBakery</li>
-          <li><span class="sk-dot d-wp"></span>Divi Builder</li>
-          <li><span class="sk-dot d-wp"></span>WooCommerce</li>
-          <li><span class="sk-dot d-wp"></span>ACF</li>
-        </ul>
-      </div>
-      <div class="sk-col">
-        <div class="sk-col-title">Advanced & Tools</div>
-        <ul class="sk-list">
-          <li><span class="sk-dot d-next"></span>Next.js</li>
-          <li><span class="sk-dot d-node"></span>Node.js</li>
-          <li><span class="sk-dot d-tool"></span>REST API / Axios</li>
-          <li><span class="sk-dot d-tool"></span>Git / GitHub</li>
-          <li><span class="sk-dot d-tool"></span>Zoho Projects</li>
-          <li><span class="sk-dot d-core"></span>Mobile-first Design</li>
-        </ul>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="h-left">
+      <div class="h-chip">Available for new opportunities</div>
+      <h1 class="h-title">
+        Lo<em class="ital">k</em>esh<br />
+        <span class="stroke">Pareek</span>
+      </h1>
+      <p class="h-body">Senior Frontend Developer — 6+ years building real-time gaming platforms, enterprise WordPress
+        ecosystems, and React-powered web apps from Jaipur, India.</p>
+      <div class="h-actions">
+        <a href="#projects" class="btn-primary">See My Work</a>
+        <a href="#contact-s" class="btn-text">Get in touch</a>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- EXPERIENCE -->
-<div id="exp" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
-  <div class="s-inner">
-    <div class="s-head r">
-      <div class="s-index">02</div>
-      <div class="s-titles">
-        <div class="s-eyebrow">Career</div>
-        <h2 class="s-heading">Work<br/><em>Experience</em></h2>
-      </div>
-      <div class="s-num">02</div>
-    </div>
-    <div class="exp-list">
-      <div class="exp-row r">
-        <div class="exp-side">
-          <div class="exp-yr">Mar 2022 — Present</div>
-          <div class="exp-co">Mobzway Technologies LLP</div>
-          <div class="exp-role">Sr. Frontend Dev</div>
+    <div class="h-right">
+      <div class="h-ring-wrap">
+        <div class="h-ring"></div>
+        <div class="h-ring-inner"></div>
+        <div class="h-ring-center">
+          <div class="h-ring-num" id="yr-count">0</div>
+          <div class="h-ring-label">Years of<br />Experience</div>
         </div>
-        <div class="exp-content">
-          <p class="exp-body">Leading frontend for live gaming & betting platforms using ReactJS, Redux, Tailwind CSS, and Material UI. Mentoring junior developers, managing sprints via Zoho, and architecting modular, reusable component systems. Also maintaining WordPress projects with theme customization and cross-browser support.</p>
-          <div class="exp-pills">
-            <span class="ep">ReactJS</span><span class="ep">Redux</span><span class="ep">Tailwind</span><span class="ep">Material UI</span><span class="ep">Bootstrap</span><span class="ep">WordPress</span>
+      </div>
+      <div class="h-stats-col">
+        <div class="h-stat">
+          <span class="h-stat-l">Projects Delivered</span>
+          <span class="h-stat-n"><span id="proj-count">0</span><sup>+</sup></span>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-l">Companies Worked At</span>
+          <span class="h-stat-n">3</span>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-l">Started Coding</span>
+          <span class="h-stat-n">2019</span>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-l">Based In</span>
+          <span class="h-stat-n" style="font-size:1rem;letter-spacing:-.5px">Jaipur, IN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ti">ReactJS</span><span class="ti-dot">✦</span>
+      <span class="ti">Next.js</span><span class="ti-dot">✦</span>
+      <span class="ti">Redux Toolkit</span><span class="ti-dot">✦</span>
+      <span class="ti">Tailwind CSS</span><span class="ti-dot">✦</span>
+      <span class="ti">WordPress</span><span class="ti-dot">✦</span>
+      <span class="ti">Material UI</span><span class="ti-dot">✦</span>
+      <span class="ti">WooCommerce</span><span class="ti-dot">✦</span>
+      <span class="ti">Node.js</span><span class="ti-dot">✦</span>
+      <span class="ti">REST API</span><span class="ti-dot">✦</span>
+      <span class="ti">Bootstrap 5</span><span class="ti-dot">✦</span>
+      <span class="ti">Context API</span><span class="ti-dot">✦</span>
+      <span class="ti">Git / GitHub</span><span class="ti-dot">✦</span>
+      <span class="ti">ReactJS</span><span class="ti-dot">✦</span>
+      <span class="ti">Next.js</span><span class="ti-dot">✦</span>
+      <span class="ti">Redux Toolkit</span><span class="ti-dot">✦</span>
+      <span class="ti">Tailwind CSS</span><span class="ti-dot">✦</span>
+      <span class="ti">WordPress</span><span class="ti-dot">✦</span>
+      <span class="ti">Material UI</span><span class="ti-dot">✦</span>
+      <span class="ti">WooCommerce</span><span class="ti-dot">✦</span>
+      <span class="ti">Node.js</span><span class="ti-dot">✦</span>
+      <span class="ti">REST API</span><span class="ti-dot">✦</span>
+      <span class="ti">Bootstrap 5</span><span class="ti-dot">✦</span>
+      <span class="ti">Context API</span><span class="ti-dot">✦</span>
+      <span class="ti">Git / GitHub</span><span class="ti-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
+    <div class="s-inner">
+      <div class="s-head r">
+        <div class="s-index">01</div>
+        <div class="s-titles">
+          <div class="s-eyebrow">Expertise</div>
+          <h2 class="s-heading">Skills & <em>Technologies</em></h2>
+        </div>
+        <div class="s-num">01</div>
+      </div>
+      <div class="sk-table r">
+        <div class="sk-col">
+          <div class="sk-col-title">React Ecosystem</div>
+          <ul class="sk-list">
+            <li><span class="sk-dot d-react"></span>ReactJS</li>
+            <li><span class="sk-dot d-react"></span>Redux Toolkit</li>
+            <li><span class="sk-dot d-react"></span>Context API</li>
+            <li><span class="sk-dot d-react"></span>React Hooks</li>
+            <li><span class="sk-dot d-react"></span>Material UI</li>
+          </ul>
+        </div>
+        <div class="sk-col">
+          <div class="sk-col-title">Core Web</div>
+          <ul class="sk-list">
+            <li><span class="sk-dot d-core"></span>HTML5</li>
+            <li><span class="sk-dot d-core"></span>CSS3</li>
+            <li><span class="sk-dot d-core"></span>JavaScript ES6+</li>
+            <li><span class="sk-dot d-core"></span>jQuery</li>
+            <li><span class="sk-dot d-core"></span>Bootstrap 5</li>
+            <li><span class="sk-dot d-core"></span>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="sk-col">
+          <div class="sk-col-title">WordPress & CMS</div>
+          <ul class="sk-list">
+            <li><span class="sk-dot d-wp"></span>WordPress</li>
+            <li><span class="sk-dot d-wp"></span>Elementor</li>
+            <li><span class="sk-dot d-wp"></span>WPBakery</li>
+            <li><span class="sk-dot d-wp"></span>Divi Builder</li>
+            <li><span class="sk-dot d-wp"></span>WooCommerce</li>
+            <li><span class="sk-dot d-wp"></span>ACF</li>
+          </ul>
+        </div>
+        <div class="sk-col">
+          <div class="sk-col-title">Advanced & Tools</div>
+          <ul class="sk-list">
+            <li><span class="sk-dot d-next"></span>Next.js</li>
+            <li><span class="sk-dot d-node"></span>Node.js</li>
+            <li><span class="sk-dot d-tool"></span>REST API / Axios</li>
+            <li><span class="sk-dot d-tool"></span>Git / GitHub</li>
+            <li><span class="sk-dot d-tool"></span>Zoho Projects</li>
+            <li><span class="sk-dot d-core"></span>Mobile-first Design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div id="exp" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
+    <div class="s-inner">
+      <div class="s-head r">
+        <div class="s-index">02</div>
+        <div class="s-titles">
+          <div class="s-eyebrow">Career</div>
+          <h2 class="s-heading">Work <em>Experience</em></h2>
+        </div>
+        <div class="s-num">02</div>
+      </div>
+      <div class="exp-list">
+        <div class="exp-row r">
+          <div class="exp-side">
+            <div class="exp-yr">Mar 2022 — Present</div>
+            <div class="exp-co">Mobzway Technologies LLP</div>
+            <div class="exp-role">Sr. Frontend Dev</div>
+          </div>
+          <div class="exp-content">
+            <p class="exp-body">Leading frontend for live gaming & betting platforms using ReactJS, Redux, Tailwind CSS,
+              and Material UI. Mentoring junior developers, managing sprints via Zoho, and architecting modular,
+              reusable component systems. Also maintaining WordPress projects with theme customization and cross-browser
+              support.</p>
+            <div class="exp-pills">
+              <span class="ep">ReactJS</span><span class="ep">Redux</span><span class="ep">Tailwind</span><span
+                class="ep">Material UI</span><span class="ep">Bootstrap</span><span class="ep">WordPress</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-row r">
+          <div class="exp-side">
+            <div class="exp-yr">Sep 2021 — Mar 2022</div>
+            <div class="exp-co">Hike Branding Ltd.</div>
+            <div class="exp-role">Frontend Developer</div>
+          </div>
+          <div class="exp-content">
+            <p class="exp-body">Built responsive, brand-focused client websites and campaign landing pages. Prioritized
+              performance optimization, cross-browser compatibility, and clean semantic HTML/CSS delivery for agency
+              deliverables.</p>
+            <div class="exp-pills">
+              <span class="ep">HTML/CSS</span><span class="ep">JavaScript</span><span class="ep">WordPress</span><span
+                class="ep">jQuery</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-row r">
+          <div class="exp-side">
+            <div class="exp-yr">Jan 2020 — Sep 2021</div>
+            <div class="exp-co">Vast Web India Pvt. Ltd.</div>
+            <div class="exp-role">Web Designer</div>
+          </div>
+          <div class="exp-content">
+            <p class="exp-body">Designed and delivered client websites with mobile-first layouts using Bootstrap,
+              jQuery, and WordPress page builders including Elementor and WPBakery. Completed 6-month certification in
+              Website Designing at Axis Web Art, Jaipur.</p>
+            <div class="exp-pills">
+              <span class="ep">Bootstrap</span><span class="ep">WordPress</span><span class="ep">jQuery</span><span
+                class="ep">Elementor</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="exp-row r">
-        <div class="exp-side">
-          <div class="exp-yr">Sep 2021 — Mar 2022</div>
-          <div class="exp-co">Hike Branding Ltd.</div>
-          <div class="exp-role">Frontend Developer</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
+    <div class="s-inner" style="padding-bottom:2rem">
+      <div class="s-head r">
+        <div class="s-index">03</div>
+        <div class="s-titles">
+          <div class="s-eyebrow">Work</div>
+          <h2 class="s-heading">Selected <em>Projects</em></h2>
         </div>
-        <div class="exp-content">
-          <p class="exp-body">Built responsive, brand-focused client websites and campaign landing pages. Prioritized performance optimization, cross-browser compatibility, and clean semantic HTML/CSS delivery for agency deliverables.</p>
-          <div class="exp-pills">
-            <span class="ep">HTML/CSS</span><span class="ep">JavaScript</span><span class="ep">WordPress</span><span class="ep">jQuery</span>
-          </div>
+        <div class="s-num">03</div>
+      </div>
+    </div>
+    <div class="proj-filters r">
+      <button class="pf on" data-f="all">All</button>
+      <button class="pf" data-f="react">React</button>
+      <button class="pf" data-f="wordpress">WordPress</button>
+      <button class="pf" data-f="nextjs">Next.js</button>
+      <button class="pf" data-f="node">React + Node</button>
+    </div>
+    <div class="proj-reel" id="projReel">
+
+      <!-- CARD 1 -->
+      <div class="p-card" data-type="react">
+        <div class="p-thumb">
+          <img src="./assets/img/playbd.png" class="" style="width: 100%; object-fit: cover;" />
+          <!-- <div class="p-ph">PlayBD</div> -->
+          <div class="p-overlay"></div>
+          <span class="p-type t-react">React</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 001</div>
+          <div class="p-name">Playbd Gaming Platform</div>
+          <div class="p-desc">Real-time gaming interface with user auth, profile, dynamic balance, deposit & withdrawal,
+            transaction history, and role-based modular UI.</div>
+          <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span
+              class="pc">Tailwind</span></div>
+          <a href="https://playbd.net/" target="_blank" class="p-link">View Live Site</a>
         </div>
       </div>
-      <div class="exp-row r">
-        <div class="exp-side">
-          <div class="exp-yr">Jan 2020 — Sep 2021</div>
-          <div class="exp-co">Vast Web India Pvt. Ltd.</div>
-          <div class="exp-role">Web Designer</div>
+
+      <!-- CARD 1 -->
+      <div class="p-card" data-type="react">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Topxbet</div> -->
+          <img src="./assets/img/topxbet.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-react">React</span>
         </div>
-        <div class="exp-content">
-          <p class="exp-body">Designed and delivered client websites with mobile-first layouts using Bootstrap, jQuery, and WordPress page builders including Elementor and WPBakery. Completed 6-month certification in Website Designing at Axis Web Art, Jaipur.</p>
-          <div class="exp-pills">
-            <span class="ep">Bootstrap</span><span class="ep">WordPress</span><span class="ep">jQuery</span><span class="ep">Elementor</span>
-          </div>
+        <div class="p-body">
+          <div class="p-num">Project — 002</div>
+          <div class="p-name">Topxbet Gaming Platform</div>
+          <div class="p-desc">Real-time gaming interface with user auth, profile, dynamic balance, deposit & withdrawal,
+            transaction history, and role-based modular UI.</div>
+          <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span
+              class="pc">Tailwind</span></div>
+          <a href="https://topxbet.vip/" target="_blank" class="p-link">View Live Site</a>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!-- PROJECTS -->
-<div id="projects" class="s" style="border-top:1px solid rgba(255,255,255,.06)">
-  <div class="s-inner" style="padding-bottom:2rem">
-    <div class="s-head r">
-      <div class="s-index">03</div>
-      <div class="s-titles">
-        <div class="s-eyebrow">Work</div>
-        <h2 class="s-heading">Selected<br/><em>Projects</em></h2>
-      </div>
-      <div class="s-num">03</div>
-    </div>
-  </div>
-  <div class="proj-filters r">
-    <button class="pf on" data-f="all">All</button>
-    <button class="pf" data-f="react">React</button>
-    <button class="pf" data-f="wordpress">WordPress</button>
-    <button class="pf" data-f="nextjs">Next.js</button>
-    <button class="pf" data-f="node">React + Node</button>
-  </div>
-  <div class="proj-reel" id="projReel">
 
-    <!-- CARD 1 -->
-     <div class="p-card" data-type="react">
-      <div class="p-thumb">
-        <div class="p-ph">PlayBD</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-react">React</span>
-      </div>
-      <div class="p-body">
-        <div class="p-num">Project — 001</div>
-        <div class="p-name">Playbd Gaming Platform</div>
-        <div class="p-desc">Real-time gaming interface with user auth, profile, dynamic balance, deposit & withdrawal, transaction history, and role-based modular UI.</div>
-        <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span class="pc">Tailwind</span></div>
-        <a href="https://playbd.net/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-     <!-- CARD 1 -->
-     <div class="p-card" data-type="react">
-      <div class="p-thumb">
-        <div class="p-ph">Topxbet</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-react">React</span>
+      <!-- CARD 2 -->
+      <div class="p-card wide" data-type="react">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Velki</div> -->
+          <img src="./assets/img/velki.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-react">React</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 003</div>
+          <div class="p-name">Velki — Sports & Casino Betting Platform</div>
+          <div class="p-desc">Real-time betting UI with live odds, wallet sync, user auth, deposit & withdrawal, betting
+            history, and live casino module. Role-based access and modular responsive design.</div>
+          <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span
+              class="pc">Bootstrap</span><span class="pc">REST API</span><span class="pc">Real-time</span></div>
+          <a href="https://wickspin.xyz/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 002</div>
-        <div class="p-name">Topxbet Gaming Platform</div>
-        <div class="p-desc">Real-time gaming interface with user auth, profile, dynamic balance, deposit & withdrawal, transaction history, and role-based modular UI.</div>
-        <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span class="pc">Tailwind</span></div>
-        <a href="https://topxbet.vip/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-   
+      <!-- CARD 3 -->
+      <div class="p-card" data-type="wordpress">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Xcel</div> -->
+          <img src="./assets/img/xcelore.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-wp">WordPress</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 004</div>
+          <div class="p-name">Xcelore Business Website</div>
+          <div class="p-desc">Full corporate site with WordPress + Elementor. Custom page designs, blog templates,
+            multi-section landing layouts. Speed and SEO optimized.</div>
+          <div class="p-stack"><span class="pc">WordPress</span><span class="pc">Elementor</span><span
+              class="pc">CSS3</span></div>
+          <a href="https://xcelore.com/" target="_blank" class="p-link">View Live Site</a>
+        </div>
+      </div>
 
-    <!-- CARD 2 -->
-     <div class="p-card wide" data-type="react">
-      <div class="p-thumb">
-        <div class="p-ph">Velki</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-react">React</span>
+      <!-- CARD 3 -->
+      <div class="p-card" data-type="wordpress">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Exei</div> -->
+          <img src="./assets/img/exei.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-wp">WordPress</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 004</div>
+          <div class="p-name">Exei Business Website</div>
+          <div class="p-desc">Full corporate site with WordPress + Elementor. Custom page designs, blog templates,
+            multi-section landing layouts. Speed and SEO optimized.</div>
+          <div class="p-stack"><span class="pc">WordPress</span><span class="pc">Elementor</span><span
+              class="pc">CSS3</span></div>
+          <a href="https://exei.ai/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 003</div>
-        <div class="p-name">Velki — Sports & Casino Betting Platform</div>
-        <div class="p-desc">Real-time betting UI with live odds, wallet sync, user auth, deposit & withdrawal, betting history, and live casino module. Role-based access and modular responsive design.</div>
-        <div class="p-stack"><span class="pc">ReactJS</span><span class="pc">Redux</span><span class="pc">Bootstrap</span><span class="pc">REST API</span><span class="pc">Real-time</span></div>
-        <a href="https://wickspin.xyz/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <!-- CARD 3 -->
-    <div class="p-card" data-type="wordpress">
-      <div class="p-thumb">
-        <div class="p-ph">Xcel</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-wp">WordPress</span>
+      <!-- CARD 4 -->
+      <div class="p-card" data-type="nextjs">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Mobzway</div> -->
+          <img src="./assets/img/mobzway.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-js">Nextjs</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 004</div>
+          <div class="p-name">Mobzway Corporate Website</div>
+          <div class="p-desc">Bootstrap + JS corporate site with REST API forms, newsletter integration, clean
+            navigation, and conversion-optimized layout.</div>
+          <div class="p-stack"><span class="pc">Bootstrap</span><span class="pc">JavaScript</span><span class="pc">REST
+              API</span></div>
+          <a href="https://www.mobzway.com/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 004</div>
-        <div class="p-name">Xcelore Business Website</div>
-        <div class="p-desc">Full corporate site with WordPress + Elementor. Custom page designs, blog templates, multi-section landing layouts. Speed and SEO optimized.</div>
-        <div class="p-stack"><span class="pc">WordPress</span><span class="pc">Elementor</span><span class="pc">CSS3</span></div>
-        <a href="https://xcelore.com/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <!-- CARD 3 -->
-    <div class="p-card" data-type="wordpress">
-      <div class="p-thumb">
-        <div class="p-ph">Exei</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-wp">WordPress</span>
-      </div>
-      <div class="p-body">
-        <div class="p-num">Project — 004</div>
-        <div class="p-name">Exei Business Website</div>
-        <div class="p-desc">Full corporate site with WordPress + Elementor. Custom page designs, blog templates, multi-section landing layouts. Speed and SEO optimized.</div>
-        <div class="p-stack"><span class="pc">WordPress</span><span class="pc">Elementor</span><span class="pc">CSS3</span></div>
-        <a href="https://exei.ai/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
+      <!-- CARD 5 — Next.js placeholder -->
 
-    <!-- CARD 4 -->
-    <div class="p-card" data-type="nextjs">
-      <div class="p-thumb">
-        <div class="p-ph">Mobzway</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-js">Nextjs</span>
-      </div>
-      <div class="p-body">
-        <div class="p-num">Project — 004</div>
-        <div class="p-name">Mobzway Corporate Website</div>
-        <div class="p-desc">Bootstrap + JS corporate site with REST API forms, newsletter integration, clean navigation, and conversion-optimized layout.</div>
-        <div class="p-stack"><span class="pc">Bootstrap</span><span class="pc">JavaScript</span><span class="pc">REST API</span></div>
-        <a href="https://www.mobzway.com/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <!-- CARD 5 — Next.js placeholder -->
-  
+      <!-- CARD 6 — React+Node placeholder -->
+      <div class="p-card" data-type="node">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">KBeauty</div> -->
+          <img src="./assets/img/k-beauty-frontend.vercel.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-node">React+Node</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 006</div>
+          <div class="p-name">KBeauty Userpanel</div>
+          <!-- <div class="p-desc">Replace this with your fullstack project — add screenshot, description, and live URL.</div> -->
+          <div class="p-stack"><span class="pc">React</span><span class="pc">Node.js</span><span class="pc">REST
+              API</span></div>
+          <a href="https://k-beauty-frontend.vercel.app/" target="_blank" class="p-link">View Live Site</a>
+        </div>
+      </div>
 
-    <!-- CARD 6 — React+Node placeholder -->
-    <div class="p-card" data-type="node">
-      <div class="p-thumb">
-        <div class="p-ph">KBeauty</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-node">React+Node</span>
+      <div class="p-card" data-type="node">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">KBeauty</div> -->
+          <img src="./assets/img/k-beauty-backend.vercel.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-node">React+Node</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 006</div>
+          <div class="p-name">KBeauty Admin Panel</div>
+          <div class="p-desc">Login Details: Id: admin@gmail.com | Password: admin123</div>
+          <div class="p-stack"><span class="pc">React</span><span class="pc">Node.js</span><span class="pc">REST
+              API</span></div>
+          <a href="https://k-beauty-admin-panel.vercel.app/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 006</div>
-        <div class="p-name">KBeauty Userpanel</div>
-        <!-- <div class="p-desc">Replace this with your fullstack project — add screenshot, description, and live URL.</div> -->
-        <div class="p-stack"><span class="pc">React</span><span class="pc">Node.js</span><span class="pc">REST API</span></div>
-        <a href="https://k-beauty-frontend.vercel.app/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <div class="p-card" data-type="node">
-      <div class="p-thumb">
-        <div class="p-ph">KBeauty</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-node">React+Node</span>
+      <!-- CARD 7 — WordPress placeholder -->
+      <div class="p-card" data-type="wordpress">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">WP</div> -->
+          <img src="./assets/img/blossomflowerdelivery.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-wp">WordPress</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 007</div>
+          <div class="p-name">Blossomflowerdelivery</div>
+          <!-- <div class="p-desc">Replace with blossomflowerdelivery — screenshot, description, and live URL.</div> -->
+          <div class="p-stack"><span class="pc">WordPress</span><span class="pc">WooCommerce</span><span
+              class="pc">ACF</span></div>
+          <a href="https://www.blossomflowerdelivery.com/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 006</div>
-        <div class="p-name">KBeauty Admin Panel</div>
-        <div class="p-desc">Login Details: Id: admin@gmail.com | Password: admin123</div>
-        <div class="p-stack"><span class="pc">React</span><span class="pc">Node.js</span><span class="pc">REST API</span></div>
-        <a href="https://k-beauty-admin-panel.vercel.app/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <!-- CARD 7 — WordPress placeholder -->
-    <div class="p-card" data-type="wordpress">
-      <div class="p-thumb">
-        <div class="p-ph">WP</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-wp">WordPress</span>
+      <div class="p-card" data-type="wordpress">
+        <div class="p-thumb">
+          <!-- <div class="p-ph">Tulsimala</div> -->
+           <img src="./assets/img/tulsimala.png" class="" style="width: 100%; object-fit: cover;" />
+          <div class="p-overlay"></div>
+          <span class="p-type t-wp">WordPress</span>
+        </div>
+        <div class="p-body">
+          <div class="p-num">Project — 007</div>
+          <div class="p-name">Tulsimala WooCommerce</div>
+          <!-- <div class="p-desc">Replace with blossomflowerdelivery — screenshot, description, and live URL.</div> -->
+          <div class="p-stack"><span class="pc">WordPress</span><span class="pc">WooCommerce</span><span
+              class="pc">ACF</span></div>
+          <a href="https://www.tulsimala.com/" target="_blank" class="p-link">View Live Site</a>
+        </div>
       </div>
-      <div class="p-body">
-        <div class="p-num">Project — 007</div>
-        <div class="p-name">Blossomflowerdelivery</div>
-        <!-- <div class="p-desc">Replace with blossomflowerdelivery — screenshot, description, and live URL.</div> -->
-        <div class="p-stack"><span class="pc">WordPress</span><span class="pc">WooCommerce</span><span class="pc">ACF</span></div>
-        <a href="https://www.blossomflowerdelivery.com/" target="_blank" class="p-link">View Live Site</a>
-      </div>
-    </div>
 
-    <div class="p-card" data-type="wordpress">
-      <div class="p-thumb">
-        <div class="p-ph">Tulsimala</div>
-        <div class="p-overlay"></div>
-        <span class="p-type t-wp">WordPress</span>
-      </div>
-      <div class="p-body">
-        <div class="p-num">Project — 007</div>
-        <div class="p-name">Tulsimala WooCommerce</div>
-        <!-- <div class="p-desc">Replace with blossomflowerdelivery — screenshot, description, and live URL.</div> -->
-        <div class="p-stack"><span class="pc">WordPress</span><span class="pc">WooCommerce</span><span class="pc">ACF</span></div>
-        <a href="https://www.tulsimala.com/" target="_blank" class="p-link">View Live Site</a>
-      </div>
     </div>
 
   </div>
-  <div class="reel-hint">Scroll horizontally to explore all projects</div>
-</div>
 
-<!-- CONTACT -->
-<div id="contact-s">
-  <div class="c-grid">
-    <div class="c-left r2">
-      <div>
-        <div class="s-eyebrow" style="margin-bottom:.75rem">04 — Contact</div>
-        <h2 class="c-big">Let's<br/>Build<br/><em>Something<br/>Great.</em></h2>
-        <p class="c-sub">Open to full-time roles, freelance projects, and remote collaborations. Let's talk about what we can create together.</p>
+  <!-- CONTACT -->
+  <div id="contact-s">
+    <div class="c-grid">
+      <div class="c-left r2">
+        <div>
+          <div class="s-eyebrow" style="margin-bottom:.75rem">04 — Contact</div>
+          <h2 class="c-big">Let's Build<br /><em>Something Great.</em></h2>
+          <p class="c-sub">Open to full-time roles, freelance projects, and remote collaborations. Let's talk about what
+            we can create together.</p>
+        </div>
+        <div class="c-links">
+          <a href="mailto:lokeshpareek766584@gmail.com" class="c-lnk">
+            <div class="c-icon">✉</div>
+            <div>
+              <div class="c-ll">Email</div>
+              <div class="c-lv">lokeshpareek766584@gmail.com</div>
+            </div>
+            <span class="c-arr">→</span>
+          </a>
+          <a href="tel:+917231079453" class="c-lnk">
+            <div class="c-icon">☎</div>
+            <div>
+              <div class="c-ll">Phone</div>
+              <div class="c-lv">+91 72310 79453</div>
+            </div>
+            <span class="c-arr">→</span>
+          </a>
+          <a href="https://pareeklokesh.github.io/portfolio/" target="_blank" class="c-lnk">
+            <div class="c-icon">◎</div>
+            <div>
+              <div class="c-ll">Portfolio</div>
+              <div class="c-lv">pareeklokesh.github.io/portfolio</div>
+            </div>
+            <span class="c-arr">→</span>
+          </a>
+          <a href="https://linkedin.com/in/lokeshpareek" target="_blank" class="c-lnk">
+            <div class="c-icon">in</div>
+            <div>
+              <div class="c-ll">LinkedIn</div>
+              <div class="c-lv">linkedin.com/in/lokeshpareek</div>
+            </div>
+            <span class="c-arr">→</span>
+          </a>
+        </div>
       </div>
-      <div class="c-links">
-        <a href="mailto:lokeshpareek766584@gmail.com" class="c-lnk">
-          <div class="c-icon">✉</div>
-          <div><div class="c-ll">Email</div><div class="c-lv">lokeshpareek766584@gmail.com</div></div>
-          <span class="c-arr">→</span>
-        </a>
-        <a href="tel:+917231079453" class="c-lnk">
-          <div class="c-icon">☎</div>
-          <div><div class="c-ll">Phone</div><div class="c-lv">+91 72310 79453</div></div>
-          <span class="c-arr">→</span>
-        </a>
-        <a href="https://pareeklokesh.github.io/portfolio/" target="_blank" class="c-lnk">
-          <div class="c-icon">◎</div>
-          <div><div class="c-ll">Portfolio</div><div class="c-lv">pareeklokesh.github.io/portfolio</div></div>
-          <span class="c-arr">→</span>
-        </a>
-        <a href="https://linkedin.com/in/lokeshpareek" target="_blank" class="c-lnk">
-          <div class="c-icon">in</div>
-          <div><div class="c-ll">LinkedIn</div><div class="c-lv">linkedin.com/in/lokeshpareek</div></div>
-          <span class="c-arr">→</span>
-        </a>
+      <div class="c-right r">
+        <div class="c-form-title">Send a Message</div>
+        <form onsubmit="return false">
+          <div class="f-row"><label class="f-lbl">Full Name</label><input class="f-in" type="text"
+              placeholder="Your name" /></div>
+          <div class="f-row"><label class="f-lbl">Email Address</label><input class="f-in" type="email"
+              placeholder="your@email.com" /></div>
+          <div class="f-row"><label class="f-lbl">Subject</label><input class="f-in" type="text"
+              placeholder="Job opportunity / Freelance project" /></div>
+          <div class="f-row"><label class="f-lbl">Message</label><textarea class="f-ta" rows="5"
+              placeholder="Tell me about your project or role..."></textarea></div>
+          <button type="submit" class="f-submit">Send Message →</button>
+        </form>
       </div>
     </div>
-    <div class="c-right r">
-      <div class="c-form-title">Send a Message</div>
-      <form onsubmit="return false">
-        <div class="f-row"><label class="f-lbl">Full Name</label><input class="f-in" type="text" placeholder="Your name"/></div>
-        <div class="f-row"><label class="f-lbl">Email Address</label><input class="f-in" type="email" placeholder="your@email.com"/></div>
-        <div class="f-row"><label class="f-lbl">Subject</label><input class="f-in" type="text" placeholder="Job opportunity / Freelance project"/></div>
-        <div class="f-row"><label class="f-lbl">Message</label><textarea class="f-ta" rows="5" placeholder="Tell me about your project or role..."></textarea></div>
-        <button type="submit" class="f-submit">Send Message →</button>
-      </form>
+  </div>
+
+  <footer>
+    <span class="f-copy">© 2026 <span>Lokesh Pareek</span> — Frontend Developer, Jaipur</span>
+    <div class="f-nav">
+      <a href="#hero">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="https://pareeklokesh.github.io/portfolio/" target="_blank">GitHub</a>
     </div>
-  </div>
-</div>
+  </footer>
 
-<footer>
-  <span class="f-copy">© 2025 <span>Lokesh Pareek</span> — Frontend Developer, Jaipur</span>
-  <div class="f-nav">
-    <a href="#hero">Home</a>
-    <a href="#projects">Projects</a>
-    <a href="https://pareeklokesh.github.io/portfolio/" target="_blank">GitHub</a>
-  </div>
-</footer>
-
-<script>
-/* CURSOR */
-const dot = document.getElementById('dot');
-const ring = document.getElementById('ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-});
-(function loop() {
-  rx += (mx - rx) * .12; ry += (my - ry) * .12;
-  ring.style.left = Math.round(rx) + 'px'; ring.style.top = Math.round(ry) + 'px';
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a, button, .sk-list li').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-big'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-big'));
-});
-
-/* NAV SCROLL */
-window.addEventListener('scroll', () =>
-  document.getElementById('nav').classList.toggle('solid', scrollY > 60));
-
-/* COUNTER ANIMATION */
-function animCount(el, target, dur) {
-  let start = null;
-  function step(ts) {
-    if (!start) start = ts;
-    const p = Math.min((ts - start) / dur, 1);
-    el.textContent = Math.floor(p * target);
-    if (p < 1) requestAnimationFrame(step);
-    else el.textContent = target;
-  }
-  requestAnimationFrame(step);
-}
-setTimeout(() => {
-  animCount(document.getElementById('yr-count'), 6, 1200);
-  animCount(document.getElementById('proj-count'), 100, 1800);
-}, 400);
-
-/* SCROLL REVEAL */
-const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); }
-}), { threshold: .08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.r, .r2').forEach(el => io.observe(el));
-
-/* HERO STAGGER */
-['.h-chip','.h-title','.h-body','.h-actions','.h-right'].forEach((s, i) => {
-  const el = document.querySelector(s);
-  if (!el) return;
-  el.style.cssText += `opacity:0;transform:translateY(20px);transition:opacity .75s ${i*.12}s ease,transform .75s ${i*.12}s ease`;
-  setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 100 + i * 120);
-});
-
-/* FILTER */
-document.querySelectorAll('.pf').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.pf').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const f = btn.dataset.f;
-    document.querySelectorAll('.p-card').forEach(c => {
-      c.classList.toggle('hidden', f !== 'all' && c.dataset.type !== f);
+  <script>
+    /* CURSOR */
+    const dot = document.getElementById('dot');
+    const ring = document.getElementById('ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
     });
-  });
-});
-</script>
+    (function loop() {
+      rx += (mx - rx) * .12; ry += (my - ry) * .12;
+      ring.style.left = Math.round(rx) + 'px'; ring.style.top = Math.round(ry) + 'px';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, button, .sk-list li').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-big'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-big'));
+    });
+
+    /* NAV SCROLL */
+    window.addEventListener('scroll', () =>
+      document.getElementById('nav').classList.toggle('solid', scrollY > 60));
+
+    /* COUNTER ANIMATION */
+    function animCount(el, target, dur) {
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        el.textContent = Math.floor(p * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+    setTimeout(() => {
+      animCount(document.getElementById('yr-count'), 6, 1200);
+      animCount(document.getElementById('proj-count'), 100, 1800);
+    }, 400);
+
+    /* SCROLL REVEAL */
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); }
+    }), { threshold: .08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.r, .r2').forEach(el => io.observe(el));
+
+    /* HERO STAGGER */
+    ['.h-chip', '.h-title', '.h-body', '.h-actions', '.h-right'].forEach((s, i) => {
+      const el = document.querySelector(s);
+      if (!el) return;
+      el.style.cssText += `opacity:0;transform:translateY(20px);transition:opacity .75s ${i * .12}s ease,transform .75s ${i * .12}s ease`;
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 100 + i * 120);
+    });
+
+    /* FILTER */
+    document.querySelectorAll('.pf').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pf').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        const f = btn.dataset.f;
+        document.querySelectorAll('.p-card').forEach(c => {
+          c.classList.toggle('hidden', f !== 'all' && c.dataset.type !== f);
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
